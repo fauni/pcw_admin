@@ -18,6 +18,7 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
 
   _AtencionsinresPageState() : super(AtencionsinresController()) {
     _con = controller as AtencionsinresController;
+    
   }
 
   late AtencionsinresController _con;
@@ -81,18 +82,23 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                               ),
                               _con.lservicios.length > 0
                                   ? TextFormField(
+                                      //controller: _con.placaController,
                                       keyboardType: TextInputType.text,
                                       initialValue: '',
                                       style: TextStyle(
                                           color: Theme.of(context).hintColor),
                                       onSaved: (input) {},
-                                      onChanged: (input) {
-                                        _con.placa = input.toUpperCase();
-                                        _con.listarClientes(_con.placa);
+                                      onChanged: (input)  {
+                                         _con.placa = input.toUpperCase();
+                                        //  _con.listarClientes(_con.placa);
 
-                                        if (_con.lclientes.length == 0) {
-                                          _con.clienteSel = new Cliente();
-                                        }
+                                        //  if (_con.lclientes.isNotEmpty ) {
+                                        //    //_con.clienteSel = new Cliente();
+                                        //    _con.clienteSel = _con.lclientes[0];
+                                        //  }
+                                        print(_con.placaController.text);
+
+                                      
                                       },
                                       decoration: InputDecoration(
                                         labelText: 'Ingrese N° de Placa',
@@ -182,7 +188,7 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                             items: getClientesDropdown(),
                                             onChanged: (opt) {
                                               setState(() {
-                                                _con.clienteSel =
+                                                _con.clienteSel = 
                                                     opt as Cliente;
                                                 _con.obtenerVehiculoXcliPlaca(
                                                     _con.clienteSel.email!,
@@ -268,6 +274,7 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                                             .esSeleccionado,
                                                         onChanged:
                                                             (bool? elegido) {
+                                                          
                                                           setState(() {
                                                             this
                                                                     ._con
@@ -276,17 +283,15 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                                                         index)
                                                                     .esSeleccionado =
                                                                 elegido;
-                                                            this
-                                                                ._con
-                                                                .sumarPrecios();
+                                                            this._con.sumarPrecios();
 
-                                                            print(this
-                                                                ._con
-                                                                .lservicios
-                                                                .elementAt(
-                                                                    index)
-                                                                .esSeleccionado);
-                                                          });
+                                                          //   print(this
+                                                          //       ._con
+                                                          //       .lservicios
+                                                          //       .elementAt(
+                                                          //           index)
+                                                          //       .esSeleccionado);
+                                                           });
                                                         },
                                                         title: Text(
                                                           this

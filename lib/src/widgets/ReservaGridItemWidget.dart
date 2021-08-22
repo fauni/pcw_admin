@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pcw_admin/src/controllers/reserva_controller.dart';
@@ -114,6 +116,8 @@ class _ReservaGridItemWidgetState extends StateMVC<ReservaGridItemWidget> {
         }
       }
     } else {
+      //Container();
+      //print(json.encode(widget.reserva));
       final result = await Navigator.push(
         context,
         MaterialPageRoute(

@@ -558,7 +558,9 @@ class _AtencionPageState extends StateMVC<AtencionPage>
                   child: Padding(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                    child: ButtonTheme(
+                    child: 
+                    !_con.cargando 
+                    ?ButtonTheme(
                       minWidth: double.infinity,
                       height: 50,
                       child: RaisedButton.icon(
@@ -580,7 +582,8 @@ class _AtencionPageState extends StateMVC<AtencionPage>
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                    ),
+                    )
+                    :Container(),
                   ),
                 )
               : Align(

@@ -69,6 +69,11 @@ class ReservaController extends ControllerMVC {
         }
         reservasInner = _reservas;
         print('actualizado');
+
+        for (var item in reservasInner) {
+          print(json.encode(item));
+        }
+
       });
     }, onError: (a) {
       // loader.remove();

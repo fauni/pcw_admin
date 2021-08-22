@@ -121,19 +121,24 @@ Future<dynamic> registrarReserva(String reserva) async {
   final String url =
       '${GlobalConfiguration().getString('api_base_url_wash')}reserva/save';
   final client = new http.Client();
+  print("******///*/**//*/*/*/");
+  print(reserva);
+  print("******///*/**//*/*/*/");
+
+  print(url);
   final response = await client.post(
     Uri.parse(url),
     headers: {HttpHeaders.contentTypeHeader: 'application/json'},
     body: reserva,
-  );
-
-  print(Uri.parse(url));
+      ) ;
+  //final response = null;
+  //print(Uri.parse(url));
   if (response.statusCode == 200) {
-    //setCurrentUser(response.body);
-    //currentUser.value = User.fromJSON(json.decode(response.body)['data']);
-    print(response.body);
+   // setCurrentUser(response.body);
+   // currentUser.value = User.fromJSON(json.decode(response.body)['data']);
+   // print(response.body);
   } else {
-    print(response.body);
+  // print(response.body);
     throw new Exception(response.body);
   }
   return reserva;

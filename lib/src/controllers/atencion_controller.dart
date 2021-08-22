@@ -20,7 +20,7 @@ class AtencionController extends ControllerMVC {
 
   bool seInicio = false;
   OverlayEntry? loader;
-
+  bool cargando = false;
   List<DetalleReserva> ldetalleReserva = []; // Listado de detalle de reserva
   Cliente cliente = new Cliente();
   Atencion atencion = new Atencion();
@@ -183,13 +183,13 @@ class AtencionController extends ControllerMVC {
     } else {
       // set up the buttons
       Widget cancelButton = FlatButton(
-        child: Text("Continuar Lavando"),
+        child: Text("Continuar Lavando",style: TextStyle(color: Colors.white)),
         onPressed: () {
           Navigator.of(context).pop();
         },
       );
       Widget continueButton = FlatButton(
-        child: Text("Finalizar"),
+        child: Text("Finalizar", style: TextStyle(color: Colors.blueAccent),),
         onPressed: () {
           finalizarAtencion();
           Navigator.of(context).pop();
@@ -218,7 +218,8 @@ class AtencionController extends ControllerMVC {
   void finalizarAtencion() async {
     // FocusScope.of(context).unfocus();
     // Overlay.of(context).insert(loader);
-
+     cargando = true;
+    setState(() { });
     atencion.imagenFinal = base64Encode(this.carFinal!.readAsBytesSync());
 
     final Stream<bool> stream = await finishAtencion(atencion, cliente);
@@ -251,6 +252,8 @@ class AtencionController extends ControllerMVC {
         content: Text('Verifica tu conexión de internet!'),
       ));
     }, onDone: () {
+      cargando=false;
+      setState(() { });
       // Helper.hideLoader(loader);
     });
   }

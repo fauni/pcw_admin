@@ -110,6 +110,7 @@ Future<Stream<bool>> finishAtencion(Atencion atencion, Cliente cliente) async {
   final String url =
       '${GlobalConfiguration().getString('api_base_url_wash')}atencion/finish';
   final client = new http.Client();
+  print(atencionToJson(atencion));
   final response = await client.post(Uri.parse(url),
       headers: {HttpHeaders.contentTypeHeader: 'application/json'},
       body: atencionToJson(atencion));

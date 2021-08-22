@@ -32,6 +32,7 @@ class _RecepcionPageState extends StateMVC<RecepcionPage>
   String? id_cliente = '';
 
   int tamElegido = 0;
+  
 
   _RecepcionPageState() : super(RecepcionController()) {
     _con = controller as RecepcionController;
@@ -184,7 +185,8 @@ class _RecepcionPageState extends StateMVC<RecepcionPage>
                         ),
                         Divider(),
                         GroupButton(
-                          selectedButtons: [int.parse(_con.reserva.tamanio!)],
+                          //selectedButton: [_con.tamanioToInt(_con.reserva.tamanio!)],//[int.parse(_con.reserva.tamanio!)],
+                          selectedButton:_con.tamanioToInt(_con.reserva.tamanio!),
                           isRadio: true,
                           spacing: 5,
                           buttons: ['M', 'L', 'XL'],
@@ -201,6 +203,7 @@ class _RecepcionPageState extends StateMVC<RecepcionPage>
                               _con.cambiaTamanio("XL");
                             }
                             print(jsonEncode(_con.ldetalleReserva));
+                            setState(() { });
                           },
                           selectedColor: Theme.of(context).primaryColor,
                           unselectedTextStyle: TextStyle(
@@ -209,6 +212,7 @@ class _RecepcionPageState extends StateMVC<RecepcionPage>
                           unselectedColor: Colors.transparent,
                           unselectedBorderColor: Theme.of(context).accentColor,
                           borderRadius: BorderRadius.circular(15),
+
                         ),
                       ],
                     ),

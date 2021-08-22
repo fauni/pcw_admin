@@ -18,6 +18,8 @@ class RecepcionController extends ControllerMVC {
   bool seInicio = false;
   OverlayEntry? loader;
 
+  int tamanioInt = 0;
+
   int canal = 0;
 
   ImagenRecepcion imagenRecepcion =
@@ -42,6 +44,7 @@ class RecepcionController extends ControllerMVC {
 
   RecepcionController() {
     // loader = Helper.overlayLoader(context);
+    print("ingreso a reservas");
   }
 
   String rutaImg(String nombre) {
@@ -142,12 +145,15 @@ class RecepcionController extends ControllerMVC {
       switch (tam) {
         case 'M':
           serv.precio = serv.precioM;
+          this.tamanioInt=0;
           break;
         case 'L':
           serv.precio = serv.precioL;
+          this.tamanioInt=1;
           break;
         case 'XL':
           serv.precio = serv.precioXl;
+          this.tamanioInt=2;
           break;
         default:
       }
@@ -303,5 +309,20 @@ class RecepcionController extends ControllerMVC {
     }, onDone: () {
       // Helper.hideLoader(loader);
     });
+  }
+  int tamanioToInt(String tam){
+    switch (tam) {
+      case "M":
+        return 0;
+        break;
+        case "L":
+         return 1;
+        break;
+        case "XL":
+        return 2;
+        break;
+      default :
+      return 2;
+    }
   }
 }

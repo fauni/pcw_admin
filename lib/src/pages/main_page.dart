@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pcw_admin/src/controllers/reserva_controller.dart';
 import 'package:pcw_admin/src/widgets/DrawerWidget.dart';
+import 'package:pcw_admin/src/widgets/ReservaGridItemWidget.dart';
 import '../repository/settings_repository.dart' as settingsRepo;
 
 class MainPage extends StatefulWidget {
@@ -180,14 +181,14 @@ class _MainPageState extends StateMVC<MainPage> {
                           children: List.generate(
                             _con.reservasInner.length,
                             (index) {
-                              return Container();
-                              // return ReservaGridItemWidget(
-                              //   heroTag: 'reserva_grid',
-                              //   reserva: _con.reservasInner.elementAt(index),
-                              //   onDismissed: () {
-                              //     _con.refreshHome();
-                              //   },
-                              // );
+                              //return Container();
+                              return ReservaGridItemWidget(
+                                heroTag: 'reserva_grid',
+                                reserva: _con.reservasInner.elementAt(index),
+                                onDismissed: () {
+                                  _con.refreshHome();
+                                },
+                              );
                             },
                           ),
                         )),

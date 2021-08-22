@@ -21,6 +21,7 @@ class AtencionsinresController extends ControllerMVC {
     "fecha": ""
   };
 
+  TextEditingController placaController = new TextEditingController();
   String placa = '';
   String inputSearch = '';
 
@@ -38,18 +39,28 @@ class AtencionsinresController extends ControllerMVC {
   AtencionsinresController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
     setClienteElegido('');
+    listarServicios();
   }
   void listarClientes(String placa) async {
+    //print ("****------obteniendo clientes ------****");
+    this.loading = true;
+    setState(() { });
     final Stream<List<Cliente>> stream = await obtenerClientesXPlaca(placa);
     stream.listen((List<Cliente> _clientes) {
-      lclientes = _clientes;
-      print("***************");
-      print(jsonEncode(lclientes));
-      setState(() {});
+      
+      if(_clientes.isNotEmpty)
+      {
+        lclientes = _clientes;
+         this.clienteSel = lclientes[0]; 
+        obtenerVehiculoXcliPlaca(clienteSel.email!,placa);
+        setState(() {});
+      }
+      
+      
     }, onError: (a) {
       scaffoldKey.currentState!.showSnackBar(
           SnackBar(content: Text('ocurrio un error al obtener clientes')));
-    }, onDone: () {});
+    }, onDone: () {this.loading=false; setState(() { });});
   }
 
 //obtiene vehiculo dado cliente y placa
@@ -63,8 +74,8 @@ class AtencionsinresController extends ControllerMVC {
           vehiculoElegido = vehiculoItem;
         });
 
-        print("***************");
-        print(jsonEncode(vehiculoAToJson(vehiculoElegido)));
+        //print("***************");
+       // print(jsonEncode(vehiculoAToJson(vehiculoElegido)));
       });
     }, onError: (a) {
       scaffoldKey.currentState!.showSnackBar(
@@ -78,8 +89,8 @@ class AtencionsinresController extends ControllerMVC {
     stream.listen((List<Servicio> _servicios) {
       setState(() {
         lservicios = _servicios;
-        print("***************");
-        print(jsonEncode(lservicios));
+        //print("***************");
+        //print(jsonEncode(lservicios));
       });
     }, onError: (a) {
       scaffoldKey.currentState!.showSnackBar(
@@ -111,8 +122,10 @@ class AtencionsinresController extends ControllerMVC {
   }
 
   void guardarReserva(BuildContext context) async {
+
     this.reservaCompleta["vehiculo"] =
         json.decode(vehiculoAToJson(this.vehiculoElegido));
+
 
     List<dynamic> lservJson = [];
     for (var itms in this.lservicios) {
@@ -130,12 +143,20 @@ class AtencionsinresController extends ControllerMVC {
     reserva.fechaCrea = now.toString();
     reserva.fechaReserva = now.toString().split(' ')[0];
     reserva.horaReserva = now.toString().split(' ')[1].substring(0, 7);
-
+    reserva.id ="0";
+    reserva.idVehiculo="0";
     this.reservaCompleta["fecha"] = json.decode(reservaToJson(reserva));
 
     this.loading = true;
     setState(() {});
-    var respuesta = await registrarReserva(json.encode(this.reservaCompleta));
+    
+
+    var respuesta = await registrarReserva(json.encode(this.reservaCompleta)).then(
+      (value) => null)
+      .onError((error, stackTrace){
+        print(error.toString());
+      } 
+      );
     print(this.reservaCompleta);
     this.loading = false;
     setState(() {});
