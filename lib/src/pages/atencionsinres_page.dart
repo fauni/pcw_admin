@@ -18,7 +18,6 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
 
   _AtencionsinresPageState() : super(AtencionsinresController()) {
     _con = controller as AtencionsinresController;
-    
   }
 
   late AtencionsinresController _con;
@@ -88,8 +87,8 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                       style: TextStyle(
                                           color: Theme.of(context).hintColor),
                                       onSaved: (input) {},
-                                      onChanged: (input)  {
-                                         _con.placa = input.toUpperCase();
+                                      onChanged: (input) {
+                                        _con.placa = input.toUpperCase();
                                         //  _con.listarClientes(_con.placa);
 
                                         //  if (_con.lclientes.isNotEmpty ) {
@@ -97,8 +96,6 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                         //    _con.clienteSel = _con.lclientes[0];
                                         //  }
                                         print(_con.placaController.text);
-
-                                      
                                       },
                                       decoration: InputDecoration(
                                         labelText: 'Ingrese N° de Placa',
@@ -148,6 +145,28 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                   : Container(), // Revisar
                               // CircularLoadingWidget(
                               //     height: height_size / 1.5),
+                              ButtonTheme(
+                                minWidth: double.infinity,
+                                height: 30,
+                                child: OutlineButton.icon(
+                                  onPressed: () {
+                                    _con.listarClientes(_con.placa);
+                                  },
+                                  icon: Icon(
+                                    Icons.search,
+                                    color: Theme.of(context).accentColor,
+                                  ),
+                                  label: Text(
+                                    'Buscar Cliente',
+                                    style: TextStyle(
+                                        color: Theme.of(context).accentColor),
+                                  ),
+                                  color: Theme.of(context).primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                              ),
                               SizedBox(
                                 height: 20,
                               ),
@@ -188,7 +207,7 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                             items: getClientesDropdown(),
                                             onChanged: (opt) {
                                               setState(() {
-                                                _con.clienteSel = 
+                                                _con.clienteSel =
                                                     opt as Cliente;
                                                 _con.obtenerVehiculoXcliPlaca(
                                                     _con.clienteSel.email!,
@@ -274,7 +293,6 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                                             .esSeleccionado,
                                                         onChanged:
                                                             (bool? elegido) {
-                                                          
                                                           setState(() {
                                                             this
                                                                     ._con
@@ -283,15 +301,17 @@ class _AtencionsinresPageState extends StateMVC<AtencionsinresPage> {
                                                                         index)
                                                                     .esSeleccionado =
                                                                 elegido;
-                                                            this._con.sumarPrecios();
+                                                            this
+                                                                ._con
+                                                                .sumarPrecios();
 
-                                                          //   print(this
-                                                          //       ._con
-                                                          //       .lservicios
-                                                          //       .elementAt(
-                                                          //           index)
-                                                          //       .esSeleccionado);
-                                                           });
+                                                            //   print(this
+                                                            //       ._con
+                                                            //       .lservicios
+                                                            //       .elementAt(
+                                                            //           index)
+                                                            //       .esSeleccionado);
+                                                          });
                                                         },
                                                         title: Text(
                                                           this

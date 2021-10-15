@@ -14,7 +14,7 @@ Future<void> main() async {
   await GlobalConfiguration().loadFromAsset('configurations');
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(EasyDynamicThemeWidget(child: MyApp()));
+    runApp(MyApp());
   });
 }
 
@@ -43,8 +43,8 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: 'Scanno',
-              primaryColor: Color(0xFF2e3092),
-              floatingActionButtonTheme: FloatingActionButtonThemeData(
+              primaryColor: const Color(0xFF2e3092),
+              floatingActionButtonTheme: const FloatingActionButtonThemeData(
                   elevation: 0, foregroundColor: Colors.white),
               bottomSheetTheme: BottomSheetThemeData(
                   backgroundColor: Colors.black.withOpacity(0.8)),
@@ -54,24 +54,23 @@ class _MyAppState extends State<MyApp> {
               primarySwatch: Colors.blue,
               // brightness: brightness,
               scaffoldBackgroundColor: Colors.transparent.withOpacity(1),
-              accentColor: Color(0xFF83bae5),
-              dividerColor: Color(0xFF409cd0),
-              focusColor: Color(0xFF3e87b7),
+              accentColor: const Color(0xFF83bae5),
+              dividerColor: const Color(0xFF409cd0),
+              focusColor: const Color(0xFF3e87b7),
               hintColor: Colors.white, //Color(0xFF409cd0),
-              textTheme: TextTheme(
+              textTheme: const TextTheme(
                 bodyText1: TextStyle(fontSize: 14.0, color: Color(0xFF2e3092)),
                 bodyText2: TextStyle(fontSize: 14.0, color: Color(0xFF409cd0)),
                 button: TextStyle(fontSize: 14.0, color: Color(0xFF409cd0)),
                 subtitle1: TextStyle(fontSize: 16.0, color: Color(0xFF409cd0)),
                 subtitle2: TextStyle(fontSize: 16.0, color: Color(0xFF409cd0)),
+                overline: TextStyle(fontSize: 16.0, color: Color(0xFF409cd0)),
                 caption: TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w300,
                     color: Color(0xFF83bae5)),
               ),
             ),
-            darkTheme: darkThemeData,
-            themeMode: EasyDynamicTheme.of(context).themeMode,
           );
         });
   }
