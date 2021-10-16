@@ -1,4 +1,4 @@
-package com.example.pcw_admin
+package app.mobile.pcw_admin
 
 import io.flutter.embedding.android.FlutterActivity
 

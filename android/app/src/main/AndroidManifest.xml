@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pcw_admin">
+    package="app.mobile.pcw_admin">
    <application
-        android:label="pcw_admin"
-        android:icon="@mipmap/ic_launcher">
+        android:label="PCW Admin"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
